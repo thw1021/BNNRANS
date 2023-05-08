@@ -1,0 +1,94 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         Euler;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+}
+
+divSchemes
+{
+    default         none;
+    // div(phi,U)      Gauss limitedLinearV 1;
+    div(phi,U)    Gauss linearUpwind grad(U);
+    // div(phi,k)      Gauss limitedLinear 1;
+    div(phi,k)     Gauss linear;
+    // div(phi,epsilon) Gauss limitedLinear 1;
+    div(phi,epsilon) Gauss linear;
+    // div(phi,omega)  Gauss limitedLinear 1;
+    div(phi,omega)  Gauss linear;
+    // div(phi,R)      Gauss limitedLinear 1;
+    div(phi,R)      Gauss linear;
+    div(R)          Gauss linear;
+    // div(phi,nuTilda) Gauss limitedLinear 1;
+    div(phi,nuTilda) Gauss linear;
+    div((nuEff*dev2(T(grad(U))))) Gauss linear;
+    div((((-0.666667*ident_)*k)+a)) Gauss linear;
+    div((((0.666667*ident_)*k)+(k*a))) Gauss linear;
+    div((((0.666667*ident_)*k)+(k*a0))) Gauss linear;
+    div(myvvf) Gauss linear;
+    div((((0.666667*ident_)*k)+(k*myvvf))) Gauss linear;
+    div(((nu*dev2(T(grad(U))))-a_star)) Gauss linear;
+    div(((nu*dev2(T(grad(U))))-a_dd)) Gauss linear;
+    div(a_dd) Gauss linear;
+    div(a_star) Gauss linear;
+    div((nut*dev2(T(grad(U))))) Gauss linear;
+    div((nu*dev2(T(grad(U))))) Gauss linear;
+    div(((nuEff*dev2(T(grad(U))))-a_dd)) Gauss linear;
+    div((((nu+nutOptimal)*dev2(T(grad(U))))-a_dd)) Gauss linear;
+    div((((nu+(nutOptimal*nut))*dev2(T(grad(U))))-a_dd)) Gauss linear; 
+    div(((nu*dev2(T(grad(U))))-(a_dd+a_0))) Gauss linear; 
+    div(a_0) Gauss linear;
+    div(a_nutL) Gauss linear;
+    div((a_dd+(2*a_0))) Gauss linear;
+    div((a_dd-a_0)) Gauss linear;
+    div((a_dd+a_0)) Gauss linear;
+    div(((nut*2)*dev2(T(grad(U))))) Gauss linear;
+    div(((nu+nutOptimal)*dev2(T(grad(U))))) Gauss linear;
+    div(((nuEff*dev2(T(grad(U))))-a_star)) Gauss linear;
+    div((nutOptimal*dev2(T(grad(U))))) Gauss linear;
+    div(((nutOptimal*dev2(T(grad(U))))-a_star)) Gauss linear; 
+    div(((nut*dev2(T(grad(U))))-a_star)) Gauss linear;
+
+}
+
+laplacianSchemes
+{
+    default         Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+wallDist
+{
+    method          meshWave;
+}
+
+// ************************************************************************* //

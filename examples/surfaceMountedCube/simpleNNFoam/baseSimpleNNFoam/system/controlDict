@@ -1,0 +1,127 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     simpleNNFoam;
+
+startFrom       startTime;
+
+startTime       0.0;
+
+stopAt          endTime;
+
+endTime         12000.0;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   2000;
+
+purgeWrite      1;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    probes
+    {
+        type            probes;
+        libs            ("libsampling.so");
+        writeControl    timeStep;
+        writeInterval   1;
+
+        fields
+        (
+            U p
+        );
+
+        probeLocations
+        (
+            (5.0 4.5 0.5)
+            (5.0 4.5 1.0)
+            (6.0 4.5 0.5)
+            (6.0 4.5 1.0)
+            (7.0 4.5 0.5)
+            (7.0 4.5 1.0)
+            (8.0 4.5 0.5)
+            (8.0 4.5 1.0)
+            (9.0 4.5 0.5)
+            (9.0 4.5 1.0)
+            (10.0 4.5 0.5)
+            (10.0 4.5 1.0)
+        );
+
+    }
+
+    fieldAverage1
+    {
+        type            fieldAverage;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    writeTime;
+        timeStart       6000;
+
+        fields
+        (
+            U
+            {
+                mean        on;
+                prime2Mean  on;
+                base        time;
+            }
+
+            p
+            {
+                mean        on;
+                prime2Mean  on;
+                base        time;
+            }
+        );
+    }
+}
+
+// libs            ("libparabolicVelocity.so");
+
+// functions
+// {
+//     #includeFunc singleGraph_x2
+//     #includeFunc singleGraph_x31
+//     #includeFunc singleGraph_x32
+//     #includeFunc singleGraph_x41
+//     #includeFunc singleGraph_x42
+//     #includeFunc singleGraph_x5
+//     #includeFunc singleGraph_x6
+//     #includeFunc singleGraph_x7
+
+//     #includeFunc singleGraph_xs2
+//     #includeFunc singleGraph_xs3
+//     #includeFunc singleGraph_xs4
+//     #includeFunc singleGraph_xs5
+//     #includeFunc singleGraph_xs6
+//     #includeFunc singleGraph_xs7
+// }
+
+// ************************************************************************* //
