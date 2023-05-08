@@ -16,6 +16,8 @@ the same mesh but also has better generalization performance when simulating com
 separation. In addition, this model allows to quantitatively demonstrate the confidence interval of the predicted flow
 quantities that are originated from the model itself.
 
+The paper is available at https://pubs.aip.org/aip/pof/article/35/5/055119/2889073/Data-driven-Reynolds-averaged-turbulence-modeling
+
 The framework utilized in the present work for formulating data-driven turbulence model is shown below:
 
 <p align="center">
@@ -56,4 +58,19 @@ Dr. Andre Weiner has written very good [tutorials](https://ml-cfd.com/) for usin
 
 If you encounter problems, feel free to open an issue. You can also email me (thw1021@nuaa.edu.cn, Hongwei Tang).
 
-
+If you find this work useful for your research, please consider citing our work
+```
+@article{10.1063/5.0149547,
+    author = {Tang, Hongwei and Wang, Yan and Wang, Tongguang and Tian, Linlin and Qian, Yaoru},
+    title = "{Data-driven Reynolds-averaged turbulence modeling with generalizable non-linear correction and uncertainty quantification using Bayesian deep learning}",
+    journal = {Physics of Fluids},
+    volume = {35},
+    number = {5},
+    year = {2023},
+    month = {05},
+    issn = {1070-6631},
+    doi = {10.1063/5.0149547},
+    url = {https://doi.org/10.1063/5.0149547},
+    note = {055119}
+}
+```
